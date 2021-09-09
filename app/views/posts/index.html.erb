@@ -32,14 +32,23 @@
 
 <%= turbo_stream_from "posts" %>
 
-<%= turbo_frame_tag "post_form" do %>
-  <%= render "form", post: @post %>
-<% end %>
+<div class="row">
+  <div class="col-12 text-right">
+    <%= link_to "#", class: 'btn btn-sm btn-primary', data: { "bs-toggle": "modal", "bs-target": "#newModal" } do %>Create Post<% end %>
+  </div>
 
-<hr>
+  <div class="col-12 col-md-6">
+    <%# render "form", post: @post %>
+    <%= render "posts/modal_new", post: @post %>
+  </div>
+</div>
 
-<%= turbo_frame_tag "posts" do %>
+<br><br>
+
+<%= turbo_frame_tag "posts", :class => "d-flex flex-wrap" do %>  
   <%= render @posts %>
 <% end %>
+
+<%# render "posts/modal_edit" %>
 
 <%# link_to 'Create Post', new_post_path, class: 'btn btn-primary text-white mt-4' %>

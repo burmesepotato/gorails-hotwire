@@ -1,14 +1,17 @@
 <%= turbo_frame_tag dom_id(@post) do %>
-  <article class="card">
+  <article class="card" style="width: 22rem;">
     <div class="card-body">
-      <h5><%= @post.title %></h5>
+      <h5>Show <%= @post.title %></h5>
       
       <p class="lead"><%= @post.body %></p>
     </div>
 
     <div class="card-footer">
-      <%= link_to 'View', @post, class: 'text-primary me-2' %>
+      <%= link_to 'View', @post, class: 'text-primary me-2', target: "_top" %>
       <%= link_to 'Edit', edit_post_path(@post), class: 'text-primary' %>
     </div>
   </article>
 <% end %>
+
+<br>
+<%= link_to 'Back', posts_path, class: 'btn-light', target: "_top" %>

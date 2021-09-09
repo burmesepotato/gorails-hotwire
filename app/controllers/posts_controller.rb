@@ -26,10 +26,15 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
+        format.turbo_stream { render turbo_stream: turbo_stream.append(Post.new, partial: "posts/modal_new", locals: { post: Post.new } ) }
+
+        # format.html { redirect_to @post, notice: "Post was successfully created." }
+        # format.json { render :show, status: :created, location: @post }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: "posts/form", locals: { post: @post } ) }
+        # format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: "posts/form", locals: { post: @post } ) }
+        # format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: "posts/modal_form", locals: { post: @post } ) }
+        format.turbo_stream
+
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -56,6 +61,13 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def open_edit_modal
+    @post_data = post
+    respond_to do |format|
+      format.js
     end
   end
 

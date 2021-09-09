@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(post) do %>
-  <article class="card">
+  <article class="card mb-4 me-4" style="width: 20rem;">
     <div class="card-body">
       <h5><%= post.title %></h5>
       
@@ -7,8 +7,19 @@
     </div>
 
     <div class="card-footer">
-      <%= link_to 'View', post, class: 'text-primary me-2' %>
-      <%= link_to 'Edit', edit_post_path(post), class: 'text-primary' %>
+      <%= link_to 'View', post, class: 'text-primary me-2', target: "_top" %>
+      <%# link_to 'Edit', edit_post_path(post), class: 'text-primary' %>
+      <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
     </div>
   </article>
+<% end %>
+
+<% if true %>
+<div class="modal fade" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= render "posts/modal_form", post: post %>
+    </div>
+  </div>
+</div>
 <% end %>
