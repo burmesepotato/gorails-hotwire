@@ -26,13 +26,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.turbo_stream { render turbo_stream: turbo_stream.append(Post.new, partial: "posts/modal_new", locals: { post: Post.new } ) }
+        # format.turbo_stream { render turbo_stream: turbo_stream.append(Post.new, partial: "posts/modal_new", locals: { post: Post.new } ) }
+        format.html { redirect_to posts_url, notice: "Post was successfully created." }
 
         # format.html { redirect_to @post, notice: "Post was successfully created." }
         # format.json { render :show, status: :created, location: @post }
       else
-        # format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: "posts/form", locals: { post: @post } ) }
-        # format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: "posts/modal_form", locals: { post: @post } ) }
         format.turbo_stream
 
         format.html { render :new, status: :unprocessable_entity }

@@ -4,7 +4,11 @@ export default class extends Controller {
 //   static targets = ["output"]
 
   connect() {
-    this.element.textContent = "Hello Stimulus!"
+    console.log("Stimulus is on!")
+  }
+
+  closeModal() {
+    console.log("closeModal invoked.")
   }
 
   passDataToModal() {
